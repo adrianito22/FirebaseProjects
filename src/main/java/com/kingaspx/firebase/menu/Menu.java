@@ -1,19 +1,48 @@
 package com.kingaspx.firebase.menu;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.*;
+import com.google.firebase.internal.NonNull;
 import com.kingaspx.firebase.model.User;
+import com.kingaspx.models.SetInformEmbarque1;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
 import static com.kingaspx.firebase.util.Common.generateUUID;
 import static com.kingaspx.firebase.util.Common.initFirebase;
+
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Menu extends javax.swing.JFrame {
 
-    private DatabaseReference mDatabase;
+    private  DatabaseReference mDatabase;
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField first_text_lbl;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel status_request_lbl;
+    // End of variables declaration//GEN-END:variables
+    JTextField ediExportadoraProcesada ;
+    JTextField ediExportadoraSolicitante;
+    JTextField ediMarca ;
+
+    JTextField ediCjasProcesDespacha;
+
+
+
+
+
+
 
     public Menu() {
         initComponents();
@@ -44,20 +73,20 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().setLayout(new java.awt.BorderLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+      //  jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Firebase Integration - Demo");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, -1));
+      //  jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, -1));
 
         status_request_lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         status_request_lbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         status_request_lbl.setText("Please, one moment...");
-        jPanel1.add(status_request_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 390, 20));
+       // jPanel1.add(status_request_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 390, 20));
 
         jLabel3.setText("Email");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
-        jPanel1.add(first_text_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 110, -1));
+      //  jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
+     //   jPanel1.add(first_text_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 110, -1));
 
         jButton1.setText("Set Value");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -65,23 +94,26 @@ public class Menu extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, -1, -1));
+      //  jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, -1, -1));
 
         jButton2.setText("Get Value");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
+
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dowloadImagesDataReport("163349");
+
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, -1, -1));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 90, -1));
+        jPanel1.add(jButton2, new GridBagLayout());
+      //  jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 90, -1));
 
         jLabel2.setText("New Username");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 90, -1));
+      //  jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
+      //  jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 90, -1));
 
         jLabel4.setText("Username");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, -1, -1));
+       //jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, -1, -1));
 
         jButton4.setText("jButton4");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -89,7 +121,7 @@ public class Menu extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, -1, -1));
+        //jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, -1, -1));
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -106,7 +138,9 @@ public class Menu extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         status_request_lbl.setVisible(true);
         status_request_lbl.setText("Please, one moment...");
-        readData();
+      //  readData();
+
+        dowloadImagesDataReport("163349");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -133,6 +167,7 @@ public class Menu extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+      //  dowloadImagesDataReport("163349");
 
         //</editor-fold>
 
@@ -144,20 +179,7 @@ public class Menu extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField first_text_lbl;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JLabel status_request_lbl;
-    // End of variables declaration//GEN-END:variables
+
 
     private void registerNewUser(String email) {
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Table...");
@@ -176,7 +198,8 @@ public class Menu extends javax.swing.JFrame {
     }
 
     private void readData() {
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Table...");
+        mDatabase = FirebaseDatabase.getInstance().getReference().child(
+                "Informes");
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -194,6 +217,56 @@ public class Menu extends javax.swing.JFrame {
             }
         });
     }
+
+
+
+
+     void dowloadImagesDataReport(String reportUNIQUEidtoSEARCH){
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        Query query = mDatabase.child("Informes").child("listInformes").orderByChild("uniqueIDinforme").equalTo(reportUNIQUEidtoSEARCH);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                SetInformEmbarque1 informEmbarque1 = null;
+                for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                    informEmbarque1 =ds.getValue(SetInformEmbarque1.class);
+
+                    System.out.println("el exportadora procesada es  "+informEmbarque1.getExportadoraProcesada());
+
+                }
+
+
+                if(informEmbarque1!=null){
+                   // JOptionPane.showMessageDialog(new JFrame(), "no esnulo y es "+informEmbarque1.getExportadoraProcesada());
+                    showAndSetDatosInformeContendores(informEmbarque1);
+                }
+
+
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+                System.out.println("el error es "+error.getMessage());
+
+                JOptionPane.showMessageDialog(new JFrame(), "es un error ");
+
+
+            }
+        });
+
+
+    }
+
+
+
+
+
+
 
     private void removeValue(DatabaseReference mDatabase, String id) {
         //Remove Value
@@ -213,5 +286,159 @@ public class Menu extends javax.swing.JFrame {
             }
         });
     }
+
+
+    private void showAndSetDatosInformeContendores(SetInformEmbarque1 info1Object){
+       // jFrameVentana = new JFrame("Java Swing Examples");
+       // jFrameVentana.setSize(1000,500);
+        // jFrameVentana.setLayout(new GridLayout(0, 1)); ///filas ,columnas
+        // private FirebaseAuth mAuth;
+        // GoogleSignInClient mGoogleSignInClient;
+        //  FirebaseAuth mAuth;
+
+        // Authentication.
+
+        jPanel1 = new JPanel(new BorderLayout(4,4));
+        jPanel1.setBorder(new EmptyBorder(4,4,4,4));
+
+        JPanel jpanel2 = new JPanel(new GridBagLayout());
+        jPanel1.add(new JScrollPane(jpanel2,
+                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));
+
+        GridBagConstraints gbcConfig1 = new GridBagConstraints();
+        gbcConfig1.insets = new Insets(4,4,4,10);
+
+
+        GridBagConstraints gbcConfig2 = new GridBagConstraints();
+        gbcConfig2.insets = new Insets(4,4,4,10);
+
+        gbcConfig2.gridx = 3;  ///EL GRID X ES CLAVE PARA CREAR MAS COLUMNAS...TERCER COLUMNA
+
+         gbcConfig1.gridx = 1;
+
+
+
+        for (int iNDICE=0; iNDICE<50; iNDICE++) {
+
+            ediMarca=new JTextField(info1Object.getMarrca());
+            gbcConfig1.gridy = iNDICE;
+          //  gbcConfig1.gridx = 0;
+            jpanel2.add(new JLabel("MARCA"), 0);
+            jpanel2.add(ediMarca, 1);
+
+            jpanel2.add(new JLabel("Label " + (iNDICE+1)), gbcConfig1);
+
+
+
+
+            jpanel2.add(new JTextField(info1Object.getMarrca(), 20), gbcConfig1);
+
+
+
+
+          //  gbcConfig1.gridx = 2;  ///EL GRID X ES CLAVE PARA CREAR MAS COLUMNAS...ETA VA ELL;A SEGUNDA COLUMNA
+            //p.add(new JTextField("Text Field " + (iNDICE+1), 20), gbc);
+          //  jpanel2.add(new JLabel("Label " + (iNDICE+1)), gbcConfig1);
+
+
+
+           // gbcConfig1.gridx = 3;  ///EL GRID X ES CLAVE PARA CREAR MAS COLUMNAS...TERCER COLUMNA
+            jpanel2.add(new JTextField("Text Field " + (iNDICE+1), 20), gbcConfig2);
+
+
+            getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+
+
+        }
+
+
+
+        /**ediExportadoraSolicitante= new Exportadora solictante()
+
+
+
+         //jpanel = new JPanel();
+
+         //  jpanel.setLayout(new GridLayout(0, 1 ));
+
+
+
+         //  jpanel.setLayout(new FlowLayout());
+         //  jpanel.setPreferredSize(new Dimension(400,400));
+
+
+
+         //  jpanel.add(jlabel1);
+
+
+         //for(int indice=0; indice<200; indice++) {
+
+         //  jlabel1.setText("LA colum n es "+indice);
+
+         //   jpanel.add(jlabel1);
+
+         //  }
+         //
+
+         //  JScrollPane scrollPane = new JScrollPane(jpanel);
+
+         jFrameVentana.add(jpanel);
+         // jFrameVentana.add(statusLabel);
+         jFrameVentana.setVisible(true);
+
+
+         }
+
+
+         private JTextArea outputTextArea;
+
+         private void showScrollPaneDemo(){
+         statusLabel.setText("Control in action: ScrollPane");
+
+
+         /*
+         // outputTextArea = new JTextArea("",5,20);
+         // JScrollPane scrollPane = new JScrollPane(mainFrame);
+
+
+         // JScrollPane scrollPane = new JScrollPane(jpanel);
+         //   JScrollBar s=new JScrollBar();
+         ///  s.setBounds(100,100, 50,100);
+
+         //  jFrameVentana.add(s);
+
+         //  scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+         //  jpanel.add(scrollPane);
+         // jFrameVentana.setVisible(true);
+
+
+         /*
+
+         JPanel p = new JPanel(new GridBagLayout());
+         ui.add(new JScrollPane(p,
+         JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+         JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));
+         GridBagConstraints gbc = new GridBagConstraints();
+         gbc.insets = new Insets(4,4,4,4);
+         for (int ii=0; ii<50; ii++) {
+         gbc.gridy = ii;
+         gbc.gridx = 0;
+         p.add(new JLabel("Label " + (ii+1)), gbc);
+         gbc.gridx = 1;
+         p.add(new JTextField("Text Field " + (ii+1), 20), gbc);
+         }
+
+
+
+
+         */
+
+
+
+
+    }
+
+
 
 }

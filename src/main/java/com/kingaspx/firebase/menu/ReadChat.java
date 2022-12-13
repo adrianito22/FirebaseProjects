@@ -31,13 +31,13 @@ public class ReadChat extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+       // getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 380, -1));
+       // getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 380, -1));
 
         jButton1.setText("jButton1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -45,10 +45,10 @@ public class ReadChat extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, -1, -1));
+       // getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, -1, -1));
 
         jButton2.setText("jButton2");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 270, -1, -1));
+        ///getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 270, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
